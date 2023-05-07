@@ -1,0 +1,144 @@
+[gd_scene load_steps=2 format=3 uid="uid://dul7axt82w0o3"]
+
+[ext_resource type="Script" path="res://main_controller.gd" id="1_v5oal"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v5oal")
+
+[node name="SimpleAlgLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 20.0
+offset_right = -60.0
+offset_bottom = 43.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center][b]Simple Algorithms[/b][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ComplexAlgLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 20.0
+offset_right = 260.0
+offset_bottom = 43.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center][b]Complex Algorithms[/b][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="SumButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 75.0
+offset_right = -60.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Sum
+"
+
+[node name="DecisionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 125.0
+offset_right = -60.0
+offset_bottom = 157.0
+grow_horizontal = 2
+text = "Decision"
+
+[node name="SelectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 175.0
+offset_right = -60.0
+offset_bottom = 207.0
+grow_horizontal = 2
+text = "Selection"
+
+[node name="SearchButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 225.0
+offset_right = -60.0
+offset_bottom = 257.0
+grow_horizontal = 2
+text = "Search
+"
+
+[node name="CountingButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 275.0
+offset_right = -60.0
+offset_bottom = 307.0
+grow_horizontal = 2
+text = "Counting
+"
+
+[node name="MaxValSelectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 325.0
+offset_right = -60.0
+offset_bottom = 357.0
+grow_horizontal = 2
+text = "Max Value Selection
+"
+
+[node name="MaxIdxSelectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 375.0
+offset_right = -60.0
+offset_bottom = 407.0
+grow_horizontal = 2
+text = "Max Index Selection
+"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 75.0
+offset_right = 260.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Sum
+"

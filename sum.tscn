@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxdffj81lh2py"]
+
+[ext_resource type="Script" path="res://sum_controller.gd" id="1_xxjxk"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_xxjxk")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = -10.0
+offset_bottom = 47.0
+grow_horizontal = 2
+
+[node name="ArrayLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = -10.0
+offset_bottom = 73.0
+grow_horizontal = 2
+text = "A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="SumLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 83.0
+offset_right = -10.0
+offset_bottom = 106.0
+grow_horizontal = 2
+text = "sum = 0
+i = 0
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="OptionsButton" type="MenuButton" parent="."]
+custom_minimum_size = Vector2(225, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 120.0
+offset_top = 140.0
+offset_right = 345.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Options
+"
+flat = false
+item_count = 2
+popup/item_0/text = "Regenerate values"
+popup/item_0/id = 0
+popup/item_1/text = "Reset"
+popup/item_1/id = 1
+
+[node name="ReadButton" type="Button" parent="."]
+custom_minimum_size = Vector2(225, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_top = 140.0
+offset_right = 110.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Read more"
+
+[node name="RunButton" type="Button" parent="."]
+custom_minimum_size = Vector2(225, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 140.0
+offset_right = -125.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Run step"
+
+[node name="PseudocodeLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 180.0
+offset_right = -10.0
+offset_bottom = 318.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "function Sum(N, A, sum)
+	sum = 0
+	loop i=1 to N
+		sum = sum + A(i)
+	end of loop
+end of function"
+fit_content = true
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend rhoncus ligula, sed tristique nibh luctus vel. Nulla molestie lectus eros, ac venenatis metus dapibus at. Sed vel nunc fermentum, eleifend massa vel, congue est. Nunc dapibus feugiat commodo. Nullam pulvinar et justo vel aliquam. Etiam ultrices lobortis rhoncus. Nullam velit ante, commodo sed ante eu, bibendum congue justo. Vestibulum id posuere velit, eget viverra orci. Vestibulum ultricies mi ut ultricies lacinia. Nullam non diam et nisi interdum malesuada.
+
+Pellentesque egestas nulla ut molestie feugiat. Suspendisse potenti. Morbi consectetur justo tellus, ac sagittis dolor tristique nec. Etiam volutpat neque vitae ligula molestie, sit amet luctus augue pretium. Curabitur vitae ornare dolor, vel accumsan augue. Aenean id sagittis felis, at consectetur nisl. Duis molestie eu lacus eu ornare. Duis gravida ut nulla eget efficitur. Maecenas eleifend lobortis tempor. Duis egestas vitae urna eu porttitor. Suspendisse accumsan dolor justo, ac ultricies risus vestibulum non. Duis orci ipsum, imperdiet ullamcorper euismod vel, feugiat eu mi. In lectus sapien, venenatis ac diam quis, laoreet viverra eros. Maecenas laoreet sit amet dui sit amet auctor. Sed finibus sed ipsum a consequat. Vivamus sem leo, vehicula ac consectetur nec, tempus finibus arcu.
+
+Aliquam metus libero, ultricies non lobortis nec, ornare non lorem. Morbi quis nunc neque. Pellentesque tempus libero et felis tristique rutrum. Sed suscipit bibendum dui, et efficitur enim euismod at. Maecenas mattis in ante quis maximus. Vestibulum tempor nulla tincidunt est convallis venenatis. Donec diam ante, consectetur et finibus eu, aliquet at erat. Sed malesuada ex eget condimentum tincidunt. Aliquam non urna sed tortor maximus iaculis. Phasellus vitae rutrum eros. Mauris sit amet mollis elit. Quisque eget enim ac elit lobortis sollicitudin eu et nulla. Donec porttitor, est vel porttitor pellentesque, orci lectus fringilla nunc, lobortis congue nisi arcu vel dui. Integer ac leo interdum, hendrerit ante id, porta velit. Curabitur massa elit, fermentum a ligula ac, cursus pharetra dui.
+
+Duis rhoncus velit non purus finibus, quis bibendum dui gravida. Curabitur volutpat cursus ornare. Nunc id facilisis leo. Etiam quis libero luctus, malesuada lorem a, malesuada dui. Pellentesque velit dui, sollicitudin vel leo quis, pretium vestibulum est. Aliquam erat volutpat. Ut facilisis, risus eget mollis scelerisque, lectus ipsum tincidunt lorem, non mollis dui mi ac nisl. Nullam ac ultricies mi, vestibulum dapibus est. Sed felis mi, mollis non eleifend vestibulum, tempus id tellus.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam tincidunt eros magna, porttitor fringilla enim hendrerit quis. Mauris est orci, dapibus vitae interdum non, dapibus id lacus. Donec eget eros risus. Suspendisse diam sem, maximus at convallis vitae, feugiat id ipsum. Ut in condimentum leo. Phasellus fermentum ligula pellentesque mollis efficitur. Suspendisse tristique libero nec elit blandit, eget congue augue feugiat. Duis mattis augue in tortor consequat, quis venenatis enim dignissim. Duis id nulla vulputate, lacinia turpis vel, vulputate nisl. Sed ac facilisis dolor, sit amet imperdiet augue. Morbi dapibus feugiat dui, eleifend volutpat urna sagittis eget. Phasellus dapibus turpis dui, sed maximus quam condimentum vel. Praesent in sapien eu odio lacinia gravida. Cras rhoncus diam in vehicula blandit. "
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -52.0
+offset_right = 210.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Return to menu"
