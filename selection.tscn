@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd57hanpoy6sl"]
+[gd_scene load_steps=2 format=3 uid="uid://dw7xxkonxu1sb"]
 
-[ext_resource type="Script" path="res://decision_controller.gd" id="1_vmqhd"]
+[ext_resource type="Script" path="res://selection_controller.gd" id="1_ikf36"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vmqhd")
+script = ExtResource("1_ikf36")
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1
@@ -76,15 +76,20 @@ layout_mode = 0
 offset_left = 250.0
 offset_top = 120.0
 offset_right = 705.0
-offset_bottom = 420.0
-text = "function Decision(N, A, exists)
+offset_bottom = 290.0
+text = "function Selection(N, A, s)
 	i = 1
-	loop (i <= n) and (not(T(A(i))))
+	loop not(T(A(i)))
 		i = i + 1
 	end of loop
-	if i <= n then
-		exists = true
-	else
-		exists = false
-	end of if
+	s = i
 end of function"
+
+[node name="InfoLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 300.0
+offset_right = 705.0
+offset_bottom = 400.0
+text = "Selected property:
+i = 0"

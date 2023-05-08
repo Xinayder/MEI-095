@@ -1,10 +1,19 @@
 extends Control
 
+signal index_changed(new)
+signal number_found(num, index)
+
 enum NUMBER_PROPERTY {
 	EVEN,
 	ODD,
 	PRIME,
 }
+
+const NUMBER_PROPERTY_STRINGS = [
+	"Even numbers",
+	"Odd numbers",
+	"Prime numbers"
+]
 
 var values = []
 var bars = []
@@ -22,6 +31,36 @@ func _ready():
 	$RunButton.pressed.connect(self._on_run_button_pressed)
 	
 	_generate_values()
+	
+	_update_info_label()
+	
+	number_found.connect(self._on_number_found)
+	index_changed.connect(self._on_index_changed)
+
+
+func _on_number_found(num, idx):
+	_update_info_label()
+	_append_info_label(num, idx)
+
+
+func _on_index_changed(idx):
+	pass
+
+func _update_info_label():
+	$InfoLabel.clear()
+	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
+	$InfoLabel.newline()
+	
+	if num_found:
+		$InfoLabel.append_text("i = %d, s = %d" % [current_idx + 1, current_idx])
+	else:
+		$InfoLabel.append_text("i = %d, s = %d" % [current_idx + 1, 0])
+
+
+func _append_info_label(num, idx):
+	$InfoLabel.newline()
+	$InfoLabel.append_text("Found number: %d, index: %d" % [num, idx])
+
 
 
 func _on_options_button_pressed(id):
@@ -36,16 +75,19 @@ func _on_options_button_pressed(id):
 			$OptionsButton.get_popup().set_item_checked(4, false)
 			$OptionsButton.get_popup().set_item_checked(5, false)
 			selected_prop = NUMBER_PROPERTY.EVEN
+			_reset()
 		4:
 			$OptionsButton.get_popup().set_item_checked(id, true)
 			$OptionsButton.get_popup().set_item_checked(3, false)
 			$OptionsButton.get_popup().set_item_checked(5, false)
 			selected_prop = NUMBER_PROPERTY.ODD
+			_reset()
 		5:
 			$OptionsButton.get_popup().set_item_checked(id, true)
 			$OptionsButton.get_popup().set_item_checked(3, false)
 			$OptionsButton.get_popup().set_item_checked(4, false)
 			selected_prop = NUMBER_PROPERTY.PRIME
+			_reset()
 
 
 func _get_random_color():
@@ -58,7 +100,8 @@ func _reset():
 	current_idx = 0
 	temp_color = null
 	num_found = false
-		
+
+	_update_info_label()
 
 func _generate_values():
 	values = []
@@ -117,25 +160,31 @@ func _on_run_button_pressed():
 	temp_color = bars[current_idx].color
 	bars[current_idx].color = Color.CRIMSON
 	
+	_update_info_label()
+	
+	var found = false
+	
 	match selected_prop:
 		NUMBER_PROPERTY.EVEN:
 			if values[current_idx] % 2 == 0:
-				num_found = true
-				bars[current_idx].color = Color.LIME
-				return
+				found = true
 		NUMBER_PROPERTY.ODD:
 			if values[current_idx] % 2 != 0:
-				num_found = true
-				bars[current_idx].color = Color.LIME
-				return
+				found = true
 		NUMBER_PROPERTY.PRIME:
 			if _is_prime(values[current_idx]):
-				num_found = true
-				bars[current_idx].color = Color.LIME
-				return
+				found = true
+	
+	if found:
+		num_found = true
+		bars[current_idx].color = Color.LIME
+		number_found.emit(values[current_idx], current_idx)
+		return
 	
 	if current_idx == values.size() - 1:
 		current_idx = 0
+		index_changed.emit(current_idx)
 		return
 	
 	current_idx += 1
+	index_changed.emit(current_idx)
