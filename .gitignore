@@ -1,4 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
-.itch-io/
+itch-io/
 itch-io.zip
