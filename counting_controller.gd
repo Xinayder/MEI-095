@@ -20,7 +20,7 @@ var bars = []
 var temp_color
 var selected_prop : NUMBER_PROPERTY = NUMBER_PROPERTY.EVEN
 var current_idx : int = 0
-var num_found : bool = false
+var count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,32 +34,17 @@ func _ready():
 	
 	_update_info_label()
 	
-	number_found.connect(self._on_number_found)
 	index_changed.connect(self._on_index_changed)
 
-
-func _on_number_found(num, idx):
-	_update_info_label()
-	_append_info_label(num, idx)
-
-
 func _on_index_changed(idx):
-	pass
+	_update_info_label()
 
 
 func _update_info_label():
 	$InfoLabel.clear()
-	if num_found:
-		$InfoLabel.append_text("i = %d, exists = true, s = %d" % [current_idx + 1, current_idx])
-	else:
-		$InfoLabel.append_text("i = %d, exists = false, s = %d" % [current_idx + 1, 0])
+	$InfoLabel.append_text("Q = %d" % count)
 	$InfoLabel.newline()
 	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
-
-
-func _append_info_label(num, idx):
-	$InfoLabel.newline()
-	$InfoLabel.append_text("Found number: %d, index: %d" % [num, idx])
 
 
 func _on_options_button_pressed(id):
@@ -99,11 +84,13 @@ func _get_random_color():
 
 
 func _reset():
-	if temp_color:
+	if temp_color and current_idx <= values.size() - 1:
 		bars[current_idx].color = temp_color
+	elif temp_color and current_idx == values.size():
+		bars[current_idx - 1].color = temp_color
 	current_idx = 0
 	temp_color = null
-	num_found = false
+	count = 0
 
 	_update_info_label()
 
@@ -155,7 +142,7 @@ func _is_prime(num: int) -> bool:
 
 
 func _on_run_button_pressed():
-	if num_found:
+	if current_idx == values.size():
 		return
 	
 	if temp_color:
@@ -163,32 +150,20 @@ func _on_run_button_pressed():
 	
 	temp_color = bars[current_idx].color
 	bars[current_idx].color = Color.RED
-	
-	_update_info_label()
-	
-	var found = false
-	
+
 	match selected_prop:
 		NUMBER_PROPERTY.EVEN:
 			if values[current_idx] % 2 == 0:
-				found = true
+				bars[current_idx].color = Color.LIME
+				count += 1
 		NUMBER_PROPERTY.ODD:
 			if values[current_idx] % 2 != 0:
-				found = true
+				bars[current_idx].color = Color.LIME
+				count += 1
 		NUMBER_PROPERTY.PRIME:
 			if _is_prime(values[current_idx]):
-				found = true
-	
-	if found:
-		num_found = true
-		bars[current_idx].color = Color.LIME
-		number_found.emit(values[current_idx], current_idx)
-		return
-	
-	if current_idx == values.size() - 1:
-		current_idx = 0
-		index_changed.emit(current_idx)
-		return
+				bars[current_idx].color = Color.LIME
+				count += 1
 	
 	current_idx += 1
 	index_changed.emit(current_idx)

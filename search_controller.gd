@@ -62,6 +62,7 @@ func _append_info_label(num, idx):
 	$InfoLabel.append_text("Found number: %d, index: %d" % [num, idx])
 
 
+
 func _on_options_button_pressed(id):
 	match id:
 		0:

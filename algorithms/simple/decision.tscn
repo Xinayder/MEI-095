@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd57hanpoy6sl"]
 
-[ext_resource type="Script" path="res://decision_controller.gd" id="1_vmqhd"]
+[ext_resource type="Script" path="res://decision_controller.gd" id="1_oee8a"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vmqhd")
+script = ExtResource("1_oee8a")
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1
@@ -76,7 +76,7 @@ layout_mode = 0
 offset_left = 250.0
 offset_top = 120.0
 offset_right = 705.0
-offset_bottom = 420.0
+offset_bottom = 380.0
 text = "function Decision(N, A, exists)
 	i = 1
 	loop (i <= n) and (not(T(A(i))))
@@ -88,3 +88,12 @@ text = "function Decision(N, A, exists)
 		exists = false
 	end of if
 end of function"
+
+[node name="InfoLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 380.0
+offset_right = 705.0
+offset_bottom = 480.0
+text = "i = 0, exists = false
+Selected property:"
