@@ -114,23 +114,10 @@ offset_top = 325.0
 offset_right = -60.0
 offset_bottom = 357.0
 grow_horizontal = 2
-text = "Max Value Selection
+text = "Maximum Selection
 "
 
-[node name="MaxIdxSelectionButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -260.0
-offset_top = 375.0
-offset_right = -60.0
-offset_bottom = 407.0
-grow_horizontal = 2
-text = "Max Index Selection
-"
-
-[node name="Button2" type="Button" parent="."]
+[node name="AssortmentButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -140,5 +127,66 @@ offset_top = 75.0
 offset_right = 260.0
 offset_bottom = 107.0
 grow_horizontal = 2
-text = "Sum
+text = "Assortment
 "
+
+[node name="SplitSelButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 125.0
+offset_right = 260.0
+offset_bottom = 157.0
+grow_horizontal = 2
+text = "Split Selection
+"
+
+[node name="IntersectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 175.0
+offset_right = 260.0
+offset_bottom = 207.0
+grow_horizontal = 2
+text = "Intersection"
+
+[node name="UnionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 225.0
+offset_right = 260.0
+offset_bottom = 257.0
+grow_horizontal = 2
+text = "Union"
+
+[node name="ConcatButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 275.0
+offset_right = 260.0
+offset_bottom = 307.0
+grow_horizontal = 2
+text = "Concatenation"
+
+[node name="SortingButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 325.0
+offset_right = 260.0
+offset_bottom = 357.0
+grow_horizontal = 2
+text = "Sorting"
