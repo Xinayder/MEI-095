@@ -22,6 +22,20 @@ var selected_prop : NUMBER_PROPERTY = NUMBER_PROPERTY.EVEN
 var current_idx : int = 0
 var num_found : bool = false
 
+var pseudocode_lines = [
+	"function Decision(N, A, exists)",
+	"\ti = 1",
+	"\tloop (i <= N) and (not(T(A(i))))",
+	"\t\ti = i + 1",
+	"\tend of loop",
+	"\tif i <= N then",
+	"\t\texists = true",
+	"\telse",
+	"\t\texists = false",
+	"\tend of if",
+	"end of function"
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ReturnButton.pressed.connect(self._return_to_menu)
@@ -33,18 +47,45 @@ func _ready():
 	_generate_values()
 	
 	_update_info_label()
+	_reset_pseudocode()
 	
 	number_found.connect(self._on_number_found)
 	index_changed.connect(self._on_index_changed)
 
 
+func _highlight_code_line(lineno):
+	$PseudocodeLabel.clear()
+	for i in range(pseudocode_lines.size()):
+		var line = pseudocode_lines[i]
+		if lineno == i:
+			$PseudocodeLabel.append_text("[color=red]%s[/color]" % line)
+		else:
+			$PseudocodeLabel.append_text(line)
+		if lineno < pseudocode_lines.size():
+			$PseudocodeLabel.newline()
+
+
+func _reset_pseudocode():
+	$PseudocodeLabel.clear()
+	for line in pseudocode_lines:
+		$PseudocodeLabel.append_text(line)
+		if line != "end of function":
+			$PseudocodeLabel.newline()
+
+
 func _on_number_found(num, idx):
 	_update_info_label()
 	_append_info_label(num, idx)
+	_highlight_code_line(4)
+	await get_tree().create_timer(0.5).timeout
+	_highlight_code_line(9)
+	await get_tree().create_timer(0.5).timeout
+	_highlight_code_line(10)
 
 
 func _on_index_changed(idx):
 	pass
+
 
 func _update_info_label():
 	$InfoLabel.clear()
@@ -104,6 +145,7 @@ func _reset():
 	num_found = false
 
 	_update_info_label()
+	_reset_pseudocode()
 
 func _generate_values():
 	values = []
@@ -153,8 +195,19 @@ func _is_prime(num: int) -> bool:
 
 
 func _on_run_button_pressed():
+	if current_idx == 0:
+		_highlight_code_line(0)
+		await get_tree().create_timer(0.5).timeout
+		_highlight_code_line(1)
+		await get_tree().create_timer(0.5).timeout
+
 	if num_found:
 		return
+	
+	_highlight_code_line(2)
+	await get_tree().create_timer(0.5).timeout
+	_highlight_code_line(3)
+	await get_tree().create_timer(0.5).timeout
 	
 	if temp_color:
 		bars[current_idx - 1].color = temp_color
@@ -177,11 +230,22 @@ func _on_run_button_pressed():
 			if _is_prime(values[current_idx]):
 				found = true
 	
+	_highlight_code_line(5)
+	await get_tree().create_timer(0.5).timeout
+	
 	if found:
+		_highlight_code_line(6)
+		await get_tree().create_timer(0.5).timeout
 		num_found = true
 		bars[current_idx].color = Color.LIME
 		number_found.emit(values[current_idx], current_idx)
 		return
+	
+	_highlight_code_line(7)
+	await get_tree().create_timer(0.5).timeout
+	_highlight_code_line(8)
+	await get_tree().create_timer(0.5).timeout
+	_highlight_code_line(9)
 	
 	if current_idx == values.size() - 1:
 		current_idx = 0

@@ -22,6 +22,19 @@ var selected_prop : NUMBER_PROPERTY = NUMBER_PROPERTY.EVEN
 var current_idx : int = 0
 var max_num : int = 0
 var max_idx : int = 0
+var stopped : bool = false
+
+var pseudocode_lines = [
+	"function MaximumValue(N, A, max)",
+	"\tmax = 0",
+	"",
+	"\tloop i=1 to N",
+	"\t\tif A(i) > max then",
+	"\t\t\tmax = A(i)",
+	"\t\tend of if",
+	"\tend of loop",
+	"end of function"
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +49,27 @@ func _ready():
 	_update_info_label()
 	
 	index_changed.connect(self._on_index_changed)
+
+
+func _highlight_code_line(lineno):
+	$PseudocodeLabel.clear()
+	for i in range(pseudocode_lines.size()):
+		var line = pseudocode_lines[i]
+		if lineno == i:
+			$PseudocodeLabel.append_text("[color=red]%s[/color]" % line)
+		else:
+			$PseudocodeLabel.append_text(line)
+		if lineno < pseudocode_lines.size():
+			$PseudocodeLabel.newline()
+
+
+func _reset_pseudocode():
+	$PseudocodeLabel.clear()
+	for line in pseudocode_lines:
+		$PseudocodeLabel.append_text(line)
+		if line != "end of function":
+			$PseudocodeLabel.newline()
+
 
 func _on_index_changed(idx):
 	_update_info_label()
@@ -94,6 +128,7 @@ func _reset():
 	max_idx = 0
 
 	_update_info_label()
+	_reset_pseudocode()
 
 func _generate_values():
 	values = []
@@ -143,8 +178,23 @@ func _is_prime(num: int) -> bool:
 
 
 func _on_run_button_pressed():
+	if current_idx == 0:
+		_highlight_code_line(0)
+		await get_tree().create_timer(0.5).timeout
+		_highlight_code_line(1)
+		await get_tree().create_timer(0.5).timeout
+		
 	if current_idx == values.size():
+		if not stopped:
+			stopped = true
+			_highlight_code_line(7)
+			await get_tree().create_timer(0.5).timeout
+			_highlight_code_line(8)
+			await get_tree().create_timer(0.5).timeout
 		return
+		
+	_highlight_code_line(3)
+	await get_tree().create_timer(0.5).timeout
 	
 	if temp_color:
 		bars[current_idx - 1].color = temp_color
@@ -152,10 +202,18 @@ func _on_run_button_pressed():
 	temp_color = bars[current_idx].color
 	bars[current_idx].color = Color.RED
 	
+	_highlight_code_line(4)
+	await get_tree().create_timer(0.5).timeout
+	
 	if values[current_idx] > max_num:
+		_highlight_code_line(5)
+		await get_tree().create_timer(0.5).timeout
 		bars[current_idx].color = Color.LIME
 		max_num = values[current_idx]
 		max_idx = current_idx
+	
+	_highlight_code_line(6)
+	await get_tree().create_timer(0.5).timeout
 	
 	current_idx += 1
 	index_changed.emit(current_idx)

@@ -8,8 +8,38 @@ var sum = 0
 
 var tween
 
+var stopped = false
+
+var pseudocode_lines = [
+	"function Sum(N, A, sum)",
+	"\tsum = 0",
+	"\tloop i=1 to N",
+	"\t\tsum = sum + A(i)",
+	"\tend of loop",
+	"end of function"
+]
+
+func _highlight_code_line(lineno):
+	$PseudocodeLabel.clear()
+	for i in range(pseudocode_lines.size()):
+		var line = pseudocode_lines[i]
+		if lineno == i:
+			$PseudocodeLabel.append_text("[color=red]%s[/color]" % line)
+		else:
+			$PseudocodeLabel.append_text(line)
+		if lineno < pseudocode_lines.size():
+			$PseudocodeLabel.newline()
+
+func _reset_pseudocode():
+	$PseudocodeLabel.clear()
+	for line in pseudocode_lines:
+		$PseudocodeLabel.append_text(line)
+		if line != "end of function":
+			$PseudocodeLabel.newline()
+
 func _ready():
 	_regenerate_values()
+	_reset_pseudocode()
 	$OptionsButton.get_popup().id_pressed.connect(self._on_options_button_pressed)
 	$ReadButton.pressed.connect(self._on_read_button_pressed)
 	$RunButton.pressed.connect(self._on_run_button_pressed)
@@ -19,6 +49,15 @@ func _return_to_menu():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_run_button_pressed():
+	if current_idx == 0:
+		_highlight_code_line(0)
+		await get_tree().create_timer(0.5).timeout
+		_highlight_code_line(1)
+		await get_tree().create_timer(0.5).timeout
+
+	_highlight_code_line(2)
+	await get_tree().create_timer(0.5).timeout
+
 	if current_idx < len(values):
 		if tween:
 			if tween.is_running():
@@ -30,11 +69,19 @@ func _on_run_button_pressed():
 		var value = values[current_idx]
 		
 		sum += value
+		_highlight_code_line(3)
 		await tween.tween_property($ProgressBar, "value", value, 1).as_relative()
 		
 		_update_sum_label(false, value)
 		
 		current_idx += 1
+	
+	if current_idx == values.size() and not stopped:
+		await get_tree().create_timer(0.5).timeout
+		stopped = true
+		_highlight_code_line(4)
+		await get_tree().create_timer(0.5).timeout
+		_highlight_code_line(5)
 
 func _on_options_button_pressed(id):
 	if id == 0:
@@ -72,9 +119,14 @@ func _reset():
 	sum = 0
 	current_idx = 0
 	
+	stopped = false
+	
 	_update_sum_label(true)
+	_reset_pseudocode()
 
 func _regenerate_values():
+	_reset()
+
 	values = []
 	total_value = 0
 	
