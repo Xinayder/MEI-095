@@ -132,15 +132,35 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 672.0
 offset_bottom = 611.0
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend rhoncus ligula, sed tristique nibh luctus vel. Nulla molestie lectus eros, ac venenatis metus dapibus at. Sed vel nunc fermentum, eleifend massa vel, congue est. Nunc dapibus feugiat commodo. Nullam pulvinar et justo vel aliquam. Etiam ultrices lobortis rhoncus. Nullam velit ante, commodo sed ante eu, bibendum congue justo. Vestibulum id posuere velit, eget viverra orci. Vestibulum ultricies mi ut ultricies lacinia. Nullam non diam et nisi interdum malesuada.
+text = "Sum before computing = 0. The computing is done by looping, and taking each element of the sequence and adding it to the total up to that point. (sum=sum+a[i], where \"i\" is the index of the element in the sequence, and \"a\" is the sequence itself) Stepping to the next element is done by increasing the value of \"i\", and running the \"i-th\" loop gives the sum of the first i elements of the sequence. (e.g.: with the third step, it's the sum of the first 3 elements)
 
-Pellentesque egestas nulla ut molestie feugiat. Suspendisse potenti. Morbi consectetur justo tellus, ac sagittis dolor tristique nec. Etiam volutpat neque vitae ligula molestie, sit amet luctus augue pretium. Curabitur vitae ornare dolor, vel accumsan augue. Aenean id sagittis felis, at consectetur nisl. Duis molestie eu lacus eu ornare. Duis gravida ut nulla eget efficitur. Maecenas eleifend lobortis tempor. Duis egestas vitae urna eu porttitor. Suspendisse accumsan dolor justo, ac ultricies risus vestibulum non. Duis orci ipsum, imperdiet ullamcorper euismod vel, feugiat eu mi. In lectus sapien, venenatis ac diam quis, laoreet viverra eros. Maecenas laoreet sit amet dui sit amet auctor. Sed finibus sed ipsum a consequat. Vivamus sem leo, vehicula ac consectetur nec, tempus finibus arcu.
+Example: The sequence(A): 5, 4, 2, 7
 
-Aliquam metus libero, ultricies non lobortis nec, ornare non lorem. Morbi quis nunc neque. Pellentesque tempus libero et felis tristique rutrum. Sed suscipit bibendum dui, et efficitur enim euismod at. Maecenas mattis in ante quis maximus. Vestibulum tempor nulla tincidunt est convallis venenatis. Donec diam ante, consectetur et finibus eu, aliquet at erat. Sed malesuada ex eget condimentum tincidunt. Aliquam non urna sed tortor maximus iaculis. Phasellus vitae rutrum eros. Mauris sit amet mollis elit. Quisque eget enim ac elit lobortis sollicitudin eu et nulla. Donec porttitor, est vel porttitor pellentesque, orci lectus fringilla nunc, lobortis congue nisi arcu vel dui. Integer ac leo interdum, hendrerit ante id, porta velit. Curabitur massa elit, fermentum a ligula ac, cursus pharetra dui.
+Initial sum: 0
+No. of elements (N): 4
 
-Duis rhoncus velit non purus finibus, quis bibendum dui gravida. Curabitur volutpat cursus ornare. Nunc id facilisis leo. Etiam quis libero luctus, malesuada lorem a, malesuada dui. Pellentesque velit dui, sollicitudin vel leo quis, pretium vestibulum est. Aliquam erat volutpat. Ut facilisis, risus eget mollis scelerisque, lectus ipsum tincidunt lorem, non mollis dui mi ac nisl. Nullam ac ultricies mi, vestibulum dapibus est. Sed felis mi, mollis non eleifend vestibulum, tempus id tellus.
+Loop I:=from 1 to 4
+sum:=sum+A[i];
+Loop end
 
-Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam tincidunt eros magna, porttitor fringilla enim hendrerit quis. Mauris est orci, dapibus vitae interdum non, dapibus id lacus. Donec eget eros risus. Suspendisse diam sem, maximus at convallis vitae, feugiat id ipsum. Ut in condimentum leo. Phasellus fermentum ligula pellentesque mollis efficitur. Suspendisse tristique libero nec elit blandit, eget congue augue feugiat. Duis mattis augue in tortor consequat, quis venenatis enim dignissim. Duis id nulla vulputate, lacinia turpis vel, vulputate nisl. Sed ac facilisis dolor, sit amet imperdiet augue. Morbi dapibus feugiat dui, eleifend volutpat urna sagittis eget. Phasellus dapibus turpis dui, sed maximus quam condimentum vel. Praesent in sapien eu odio lacinia gravida. Cras rhoncus diam in vehicula blandit. "
+Loop on first step:
+i=1,    A[1]=5
+sum:=sum+A[i] => sum:=0+5 => sum=5
+
+Loop on second step:
+i=2,    A[2]=4
+sum:=sum+A[i] => sum:=5+4 => sum=9
+
+Loop on third step:
+i=3,    A[3]=2
+sum:=sum+A[i] => sum:=9+2 => sum=11
+
+Loop on fourth step:
+i=4,    A[4]=7
+sum:=sum+A[i] => sum:=11+7 => sum=18
+
+
+The execution of the loop ends here, since i has reached 4. We have obtained the sum of the elements. The printing of, or computing with the obtained value can be done after the loop has finished."
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1

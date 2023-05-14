@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://cncc4il34236y"]
+
+[ext_resource type="Script" path="res://sort_controller.gd" id="1_ndigq"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ndigq")
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -52.0
+offset_right = 210.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Return to menu
+"
+
+[node name="RunButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+offset_left = 250.0
+offset_top = 20.0
+offset_right = 450.0
+offset_bottom = 52.0
+text = "Run step"
+
+[node name="ReadButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+offset_left = 250.0
+offset_top = 70.0
+offset_right = 450.0
+offset_bottom = 102.0
+text = "Read more
+"
+
+[node name="OptionsButton" type="MenuButton" parent="."]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 1
+offset_left = 475.0
+offset_top = 20.0
+offset_right = 675.0
+offset_bottom = 52.0
+text = "Options
+"
+flat = false
+item_count = 6
+popup/item_0/text = "Regenerate values"
+popup/item_0/id = 0
+popup/item_1/text = "Reset"
+popup/item_1/id = 1
+popup/item_2/text = "Property"
+popup/item_2/id = 2
+popup/item_2/separator = true
+popup/item_3/text = "Even numbers"
+popup/item_3/checkable = 1
+popup/item_3/id = 3
+popup/item_4/text = "Odd numbers"
+popup/item_4/checkable = 1
+popup/item_4/id = 4
+popup/item_5/text = "Prime numbers"
+popup/item_5/checkable = 1
+popup/item_5/id = 5
+
+[node name="PseudocodeLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 120.0
+offset_right = 705.0
+offset_bottom = 340.0
+text = "function SwapSort(N, A)
+	loop i=1 to N - 1
+		loop j = i + 1 to N
+			if A(i) > A(j) then
+				Swap(A(i), A(j))
+			end of if
+		end of inner loop
+	end of outer loop
+end of function"
+
+[node name="InfoLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 340.0
+offset_right = 705.0
+offset_bottom = 440.0
+text = "max = 0 
+Selected property:"
