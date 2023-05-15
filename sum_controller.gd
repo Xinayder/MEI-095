@@ -49,6 +49,15 @@ func _return_to_menu():
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_run_button_pressed():
+	if current_idx == values.size():
+		if not stopped:
+			await get_tree().create_timer(0.5).timeout
+			stopped = true
+			_highlight_code_line(4)
+			await get_tree().create_timer(0.5).timeout
+			_highlight_code_line(5)
+		return
+
 	if current_idx == 0:
 		_highlight_code_line(0)
 		await get_tree().create_timer(0.5).timeout
@@ -75,13 +84,6 @@ func _on_run_button_pressed():
 		_update_sum_label(false, value)
 		
 		current_idx += 1
-	
-	if current_idx == values.size() and not stopped:
-		await get_tree().create_timer(0.5).timeout
-		stopped = true
-		_highlight_code_line(4)
-		await get_tree().create_timer(0.5).timeout
-		_highlight_code_line(5)
 
 func _on_options_button_pressed(id):
 	if id == 0:
@@ -101,6 +103,7 @@ func _update_sum_label(reset, diff=0):
 	$SumLabel.clear()
 	if diff > 0:
 		$SumLabel.append_text("sum = %d [color=green](+%d)[/color]" % [sum, diff])
+		_highlight_array_element(current_idx)
 	else:
 		$SumLabel.append_text("sum = %d" % sum)
 	$SumLabel.newline()
@@ -123,22 +126,28 @@ func _reset():
 	
 	_update_sum_label(true)
 	_reset_pseudocode()
+	_reset_array_label()
 
-func _regenerate_values():
-	_reset()
 
-	values = []
-	total_value = 0
-	
+func _highlight_array_element(idx):
 	$ArrayLabel.clear()
 	$ArrayLabel.append_text("A = [")
-	
-	for i in range(10):
-		var value = randi_range(1, 20)
-		total_value += value
-		values.append(value)
-	
-	$ProgressBar.max_value = total_value
+	for i in range(values.size()):
+		var value = values[i]
+		if idx == i:
+			$ArrayLabel.append_text("[color=red]%d[/color]" % value)
+		else:
+			$ArrayLabel.append_text("%d" % value)
+		
+		if i < len(values) - 1:
+			$ArrayLabel.append_text(", ")
+		else:
+			$ArrayLabel.append_text("]")
+
+
+func _reset_array_label():
+	$ArrayLabel.clear()
+	$ArrayLabel.append_text("A = [")
 	
 	for idx in range(values.size()):
 			var num = values[idx]
@@ -147,3 +156,18 @@ func _regenerate_values():
 				$ArrayLabel.append_text(", ")
 			else:
 				$ArrayLabel.append_text("]")
+
+func _regenerate_values():
+	_reset()
+
+	values = []
+	total_value = 0
+	
+	for i in range(10):
+		var value = randi_range(1, 20)
+		total_value += value
+		values.append(value)
+	
+	$ProgressBar.max_value = total_value
+	
+	_reset_array_label()
