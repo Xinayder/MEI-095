@@ -94,9 +94,9 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("i = %d, j = %d, q = %d" % [current_idx + 1, b_idx, c_idx])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
 	$InfoLabel.newline()
-	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
+	$InfoLabel.append_text("i = %d\t\tj = %d\t\tq = %d" % [current_idx + 1, b_idx, c_idx])
 
 
 func _intersect_arrays(arr1, arr2):

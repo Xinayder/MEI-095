@@ -84,7 +84,9 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("i = %d, q = %d, r = %d" % [current_idx + 1, b_idx, c_idx])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
+	$InfoLabel.newline()
+	$InfoLabel.append_text("i = %d\t\tq = %d\t\tr = %d" % [current_idx + 1, b_idx, c_idx])
 	$InfoLabel.newline()
 	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
 

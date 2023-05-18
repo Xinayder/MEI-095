@@ -64,19 +64,23 @@ popup/item_2/separator = true
 popup/item_3/text = "Even numbers"
 popup/item_3/checkable = 1
 popup/item_3/id = 3
+popup/item_3/disabled = true
 popup/item_4/text = "Odd numbers"
 popup/item_4/checkable = 1
 popup/item_4/id = 4
+popup/item_4/disabled = true
 popup/item_5/text = "Prime numbers"
 popup/item_5/checkable = 1
 popup/item_5/id = 5
+popup/item_5/disabled = true
 
 [node name="PseudocodeLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 250.0
 offset_top = 120.0
 offset_right = 705.0
-offset_bottom = 500.0
+offset_bottom = 460.0
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "function Union(N, A, M, B, q, C)
 	C = A
@@ -97,9 +101,18 @@ end of function"
 
 [node name="InfoLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 500.0
-offset_right = 705.0
-offset_bottom = 600.0
+offset_left = 10.0
+offset_top = 440.0
+offset_right = 465.0
+offset_bottom = 540.0
 text = "max = 0 
 Selected property:"
+
+[node name="HelpLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 608.0
+offset_right = 710.0
+offset_bottom = 668.0
+bbcode_enabled = true
+text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."

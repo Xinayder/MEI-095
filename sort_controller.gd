@@ -78,13 +78,12 @@ func _reset_pseudocode():
 			$PseudocodeLabel.newline()
 
 
-func _on_index_changed(idx):
+func _on_index_changed(idx, idx2):
 	_update_info_label()
 
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("max = %d, index = %d" % [max_num, max_idx])
 
 
 func _on_options_button_pressed(id):
@@ -204,7 +203,6 @@ func _on_run_button_pressed():
 			_highlight_code_line(8)
 			await get_tree().create_timer(0.5).timeout
 			stopped = true
-		bars[current_idx].color = colors.get(values[current_idx])
 		current_idx = 0
 		next_idx = 0
 		stopped = false
@@ -226,7 +224,6 @@ func _on_run_button_pressed():
 		tween.kill()
 
 	bars[current_idx - 1].color = colors.get(values[current_idx - 1])
-	bars[next_idx].color = colors.get(values[next_idx])
 	bars[current_idx].color = Color.RED
 	
 	_highlight_code_line(3)
@@ -235,6 +232,9 @@ func _on_run_button_pressed():
 	if values[current_idx] > values[next_idx]:
 		var bar1 = bars[current_idx]
 		var bar2 = bars[next_idx]
+		
+		bar1.color = Color.LIME
+		bar2.color = Color.LIME
 		
 		var temp_val = values[current_idx]
 		values[current_idx] = values[next_idx]
@@ -250,13 +250,19 @@ func _on_run_button_pressed():
 		tween.tween_property(bar1, "position", pos2, 0.5)
 		tween.tween_property(bar2, "position", pos1, 0.5)
 		
-
-		bars[current_idx] = bar2
-		bars[next_idx] = bar1
+		tween.finished.connect(self._update_bars.bind(bar1, bar2, current_idx, next_idx))
 	
 	_highlight_code_line(5)
 	await get_tree().create_timer(0.5).timeout
 	
 	next_idx += 1
 	current_idx += 1
-	index_changed.emit(current_idx)
+	index_changed.emit(current_idx, next_idx)
+
+
+
+func _update_bars(bar1, bar2, idx1, idx2):
+	bar1.color = colors.get(values[idx2])
+	bar2.color = colors.get(values[idx1])
+	bars[idx1] = bar2
+	bars[idx2] = bar1

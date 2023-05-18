@@ -89,7 +89,9 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("i = %d, exists = %s" % [current_idx + 1, num_found])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
+	$InfoLabel.newline()
+	$InfoLabel.append_text("i = %d\t\texists = %s" % [current_idx + 1, num_found])
 	$InfoLabel.newline()
 	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
 
@@ -195,7 +197,7 @@ func _is_prime(num: int) -> bool:
 
 
 func _on_run_button_pressed():
-	if current_idx == 0:
+	if current_idx == 0 and not num_found:
 		_highlight_code_line(0)
 		await get_tree().create_timer(0.5).timeout
 		_highlight_code_line(1)

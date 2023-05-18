@@ -95,9 +95,9 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("i = %d, j = %d, q = %d" % [current_idx + 1, b_idx, c_idx])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
 	$InfoLabel.newline()
-	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
+	$InfoLabel.append_text("i = %d\t\tj = %d\t\tq = %d" % [current_idx + 1, b_idx, c_idx])
 
 
 func _intersect_arrays(arr1, arr2):
@@ -342,12 +342,12 @@ func _on_run_button_pressed():
 			
 			values_c.append(values_b[b_idx])
 			
+			_highlight_code_line(12)
+			await get_tree().create_timer(0.5).timeout
+			
 			var bar = _duplicate_bar(bars_b[b_idx], values_b[b_idx], b_idx)
 			bars_c.append(bar)
 			add_child(bar)
-			
-			_highlight_code_line(12)
-			await get_tree().create_timer(0.5).timeout
 			
 			var tween = create_tween()
 			tween.tween_property(bar, "position", Vector2(130, 20 + (40 * c_idx)), 0.5)

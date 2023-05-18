@@ -96,16 +96,15 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	if num_found:
-		$InfoLabel.append_text("i = %d, exists = true, s = %d" % [current_idx + 1, current_idx])
-	else:
-		$InfoLabel.append_text("i = %d, exists = false, s = %d" % [current_idx + 1, 0])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
+	$InfoLabel.newline()
+	$InfoLabel.append_text("i = %d\t\texists = %s\t\ts = %d" % [current_idx + 1, num_found, (current_idx if num_found else 0)])
 	$InfoLabel.newline()
 	$InfoLabel.append_text("Selected property: %s" % NUMBER_PROPERTY_STRINGS[selected_prop])
 
 
 func _append_info_label(num, idx):
-	$InfoLabel.newline()
+	$InfoLabel.newline()	
 	$InfoLabel.append_text("Found number: %d, index: %d" % [num, idx])
 
 

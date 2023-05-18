@@ -77,7 +77,9 @@ func _on_index_changed(idx):
 
 func _update_info_label():
 	$InfoLabel.clear()
-	$InfoLabel.append_text("max = %d, index = %d" % [max_num, max_idx])
+	$InfoLabel.append_text("[b][color=orange]PARAMETERS[/color][/b]")
+	$InfoLabel.newline()
+	$InfoLabel.append_text("max = %d\t\tindex = %d" % [max_num, max_idx])
 
 
 func _on_options_button_pressed(id):
