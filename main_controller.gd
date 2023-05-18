@@ -14,7 +14,7 @@ func _ready():
 	$SplitSelButton.pressed.connect(self._change_scene.bind("algorithms/complex/split_selection"))
 	$IntersectionButton.pressed.connect(self._change_scene.bind("algorithms/complex/intersection"))
 	$UnionButton.pressed.connect(self._change_scene.bind("algorithms/complex/union"))
-	
+	$ConcatButton.pressed.connect(self._change_scene.bind("algorithms/complex/merge_sort"))
 	$SortingButton.pressed.connect(self._change_scene.bind("algorithms/complex/sort"))
 
 func _change_scene(scene):
