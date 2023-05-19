@@ -119,11 +119,15 @@ end of function"
 fit_content = true
 
 [node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
 position = Vector2i(20, 40)
 size = Vector2i(680, 660)
 mode = 3
 transient = false
 unresizable = true
+always_on_top = true
+popup_window = true
 min_size = Vector2i(680, 660)
 dialog_autowrap = true
 
@@ -132,7 +136,9 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 672.0
 offset_bottom = 611.0
-text = "Sum before computing = 0. The computing is done by looping, and taking each element of the sequence and adding it to the total up to that point. (sum=sum+a[i], where \"i\" is the index of the element in the sequence, and \"a\" is the sequence itself) Stepping to the next element is done by increasing the value of \"i\", and running the \"i-th\" loop gives the sum of the first i elements of the sequence. (e.g.: with the third step, it's the sum of the first 3 elements)
+text = "Given is sequence (A) with N number of elements. Give the Sum of the elements
+
+Solution: Sum before computing = 0. The computing is done by looping, and taking each element of the sequence and adding it to the total up to that point. (sum=sum+a[i], where \"i\" is the index of the element in the sequence, and \"a\" is the sequence itself) Stepping to the next element is done by increasing the value of \"i\", and running the \"i-th\" loop gives the sum of the first i elements of the sequence. (e.g.: with the third step, it's the sum of the first 3 elements)
 
 Example: The sequence(A): 5, 4, 2, 7
 

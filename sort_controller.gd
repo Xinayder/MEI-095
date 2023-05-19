@@ -25,6 +25,8 @@ var max_idx : int = 0
 var next_idx : int = 1
 var stopped : bool = false
 
+var sorted = []
+
 var first_run : bool = true
 
 var tween
@@ -56,6 +58,11 @@ func _ready():
 	_update_info_label()
 	
 	index_changed.connect(self._on_index_changed)
+	$ReadButton.pressed.connect(self._on_read_button_pressed)
+
+
+func _on_read_button_pressed():
+	$DescriptionDialog.show()
 
 
 func _highlight_code_line(lineno):
@@ -113,10 +120,24 @@ func _on_options_button_pressed(id):
 			_reset()
 
 
+func _get_color_distance(c1, c2) -> float:
+	var r_m = (c1.r8 + c2.r8) / 2
+	var d_r = (c1.r8 - c2.r8)
+	var d_g = (c1.g8 - c2.g8)
+	var d_b = (c1.b8 - c2.b8)
+
+	return sqrt((((512 + r_m)*d_r *d_r) >> 8) + 4*d_g *d_g + (((767 - r_m)*d_b*d_b) >> 8))
+
+
 func _get_random_color():
 	var color = Color(randf(), randf(), randf())
 	
-	if abs(color.h - Color.RED.h) <= 0.25 or abs(color.h - Color.LIME.h) <= 0.25:
+	var dist_red = _get_color_distance(color, Color.RED)
+	var dist_lime = _get_color_distance(color, Color.LIME)
+	
+	var threshold = 196.0
+	
+	if dist_red <= threshold or dist_lime <= threshold:
 		color = _get_random_color()
 
 	return color
@@ -141,6 +162,7 @@ func _reset():
 
 func _generate_values():
 	values = []
+	sorted = []
 	
 	if bars:
 		for bar in bars:
@@ -175,6 +197,9 @@ func _generate_values():
 		
 		bars.append(bar)
 		add_child(bar)
+	
+	sorted = [] + values
+	sorted.sort()
 
 
 func _return_to_menu():
@@ -189,6 +214,9 @@ func _is_prime(num: int) -> bool:
 
 
 func _on_run_button_pressed():
+	if values.hash() == sorted.hash():
+		return
+
 	if current_idx == 0 and first_run:
 		_highlight_code_line(0)
 		await get_tree().create_timer(0.5).timeout

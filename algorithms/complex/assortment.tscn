@@ -105,3 +105,60 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "There is an N element sequence (A) and a property that can be performed on the sequence (T). Give those elements which have this property in sequence B, and the number of these elements.
+
+Solution: At the start the number of elements=0. The method of the selection is the following: we perform a counting loop and we investigate on every element if they have that property or not. If yes, then we add +1 o the element, and we put it into sequence B. If no then we go to the next loop. After performing the operation, in sequence B every element has to carry property T.
+
+Example: sequence  (A): 5, 4, 2, 7
+
+Element at the start: 0
+Number of elements (N): 4
+T: even number
+B sequence is empty
+
+Loop I:=from 1 to 4
+If T(A(I)) then DB:=DB+1; B(DB):=A(I);
+End of loop
+
+Performing the loop for the first time:
+i=1,  A[1]=5
+even(5)=false  => we go to the next loop, db and sequence B wont change
+db=0;  sequence B is empty
+
+Performing the loop for the second time:
+i=2,  A[2]=4
+even(4)=true
+db:=db+1 => db:=0+1 => db=1
+B(1):=4 => sequence B=4
+
+Performing the loop for the third time:
+i=3,  A[3]=2
+even(2)=true
+db:=db+1 => db:=1+1 => db=2
+B(2):=2 => sequence B=4, 2
+
+Performing the loop for the fourth time:
+i=4,  A[4]=7
+even(7)=false => we skip to the next loop, db and sequence B wont change
+db=2; sequence B=4, 2
+
+ The loop ends here, because i=4. We got the elements from sequence A with property T in sequence B, and the number of elements in db. The transcript of the solution, or any further operation can be performed after the loop ends."

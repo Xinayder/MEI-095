@@ -106,3 +106,78 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "Given is sequence (A) with N number of elements, and property (T). Determine whether there exists an element with the given property!
+
+Solution:	 We initialize the sequence (I:=1) so we can begin examining with the first element.
+	We step one element per loop, until we reach the end of the sequence, and the element we are on does not have the given property (T). The loop can end either of two ways. Either by reaching the end of the sequence (I>N), meaning we haven't found an element with the given property, OR by finding an element with property (T), meaning the index is smaller than no. of elements. This can be decided using a condition check, based on which variable \"VAN\" is given a true or false value.
+ 
+1. Example: The sequence(A): 5, 4, 2, 7
+
+No. of elements (N): 4
+T: even number
+
+Loop while I <= N and not T(A(I))
+I:=I+1;
+Loop end
+
+Loop on first step:
+i=1,    A[1]=5
+1<4 and even(5)=false    => we move on
+
+Loop on second step:
+i=2,    A[2]=4
+i<4 and even(4)=true => second condition is not false, so we quit the loop
+VAN:=(2<=4); => VAN:=true
+
+The execution of the loop ends here, since we've found an element with property (T).
+
+2. Example The sequence (A): 5, 4, 2, 7
+
+No. of elements (N): 4
+T: larger than 8
+
+Loop while I <= N and notT(A(I))
+I:=I+1;
+Loop end
+
+Loop on first step:
+i=1,    A[1]=5
+1<4 and (5>8)=false    => we move on
+
+Loop on second step:
+i=2,    A[1]=4
+2<4 and (4>8)=false    => we move on
+
+Loop on third step:
+i=3,    A[1]=2
+3<4 and (2>8)=false    => we move on
+
+Loop on fourth step:
+i=4,    A[1]=7
+4=4 and (7>8)=false    => we move on
+
+Loop on fifth step:
+i=5,    A[5]=();
+(5<4)=false => the first condition is false, so we quit the loop
+VAN:=(5<=4); => VAN:=false
+
+The execution of the loop ends here, since we've inspected all elements of the sequence and have not found an element with property (T)."

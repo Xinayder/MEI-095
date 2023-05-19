@@ -104,3 +104,58 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "Given is sequence (A) with N number of elements and property (T). Give the number of elements in the sequence meeting property (T)!
+
+Solution: Initial count of elements=0. Counting is done by going through all elements with a counting loop and inspecting whether each one meets the given requirement or not. If so, we increase the element count by one, otherwise we move on.
+
+ 
+Example: The sequence(A): 5, 4, 2, 7
+
+Initial element count: 0 (db)
+No. of elements (N): 4
+T: even number
+
+Loop I:=from 1 to 4
+If T(A(I)) then DB:=DB+1;
+Loop end
+
+Loop on first step
+i=1,    A[1]=5
+even(5)=false    => we move on, value of count (db) does not change
+db=0
+
+Loop on second step:
+i=2,    A[2]=4
+even(4)=true
+db:=db+1 => db:=0+1 => db=1
+
+Loop on third step:
+i=3,    A[3]=2
+even(2)=true
+db:=db+1 => db:=1+1 => db=2
+
+Loop on fourth step:
+i=4,    A[4]=7
+even(7)=true => we move one, value of count (db) does not change
+db=2
+
+The execution of the loop ends here, since i has reached 4. We've obtained the count of elements with (T) in (A) from var. (db)."

@@ -116,3 +116,89 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "We have a N and M element series (a and B). Give the elements in series C, which are at least in series A or series B.
+
+Solution: The first step is that we copy all elements from series A to series C, then we go through series B and we check every element if they were in series A. We use a loop for every element in series B to go through series A until it gets to the end or finds an element, which is the same. If we cannot find the element, then we increase series C, if we found then we just go to the next element of series B. The procedure ends if we investigated every element of series B.
+
+Example: Series A: 5, 4, 2, 7
+Series B: 4, 12, 3, 5, 9
+Number of elements at start: 0
+Number of elements in series A (N): 4
+Number of elements in series B (M): 5
+
+C=A => C=5, 4, 2, 7
+DB=4
+
+Loop I = J to 5
+I = 1;
+Loop until I<=N and A(I)!=B(J)
+I=I+1;
+Loop ends
+If I>N then DB=DB+1; C(DB)=B(J);
+End of loop
+
+Proceeding the outer loop for the first time:
+i=1, j=1;
+Proceeding the inner loop for the first time: 1<=4 and 5!=4 =>I=I+1 =>I=1+1 => I=2
+Proceeding the inner loop for the second time: 2<=4 and (4!=4)=false=> the second condition is false, so we exit the inner loop
+(2>5)=false => proceeding the inner loop ends, we go to the next element of series B
+
+Proceeding the outer loop for the second time:
+i=1, j=2;
+Proceeding the inner loop for the first time: 1<=4 and 5!=12 =>I=I+1 =>I=1+1 => I=2
+Proceeding the inner loop for the second time: 2<=4 and 4!=12 =>I=I+1 =>I=2+1 => I=3
+Proceeding the inner loop for the third time: 3<=4 and 2!=12 =>I=I+1 =>I=3+1 => I=4
+Proceeding the inner loop for the fourth time: 4<=4 and 7!=4 =>I=I+1 =>I=4+1 => I=5
+Proceeding the inner loop again (5<=4)=false => we exit the inner loop
+5>4 =>  we increase DB and we put the element into series C
+DB=DB+1 => DB=4+1 => DB=5
+C(DB)=A(I) => C(5)=12 => series C=5, 4, 2, 7, 12
+
+Proceeding the outer loop for the third time:
+i=1, j=3;
+Proceeding the inner loop for the first time: 1<=4 and 5!=3 =>I=I+1 =>I=1+1 => I=2
+Proceeding the inner loop for the second time: 2<=4 and 4!=3 =>I=I+1 =>I=2+1 => I=3
+Proceeding the inner loop for the third time: 3<=4 and 2!=3 =>I=I+1 =>I=3+1 => I=4
+Proceeding the inner loop for the four time: 4<=4 and 7!=3 =>I=I+1 =>I=4+1 => I=5
+Proceeding the inner loop again (5<=4)=false => we exit the inner loop
+5>4 =>  we increase DB and add then element to series C
+DB=DB+1 => DB=5+1 => DB=6
+C(DB)=A(I) => C(6)=3 => series C=5, 4, 2, 7, 12, 3
+
+Proceeding the outer loop for the fourth time:
+
+i=1, j=4;
+Proceeding the inner loop for the first time: 1<=4 and (5!=5)=false => the second condition is false, so we exit the inner loop
+(2>5)=false => proceeding the inner loop ends, we go to the next element of series B
+
+Proceeding the outer loop for the fifth time:
+i=1, j=5;
+Proceeding the inner loop for the first time: 1<=4 and 5!=9 =>I=I+1 =>I=1+1 => I=2
+Proceeding the inner loop for the second time: 2<=4 and 4!=9 =>I=I+1 =>I=2+1 => I=3
+Proceeding the inner loop for the third time: 3<=4 and 2!=9 =>I=I+1 =>I=3+1 => I=4
+Proceeding the inner loop for the fourth time: 4<=4 and 7!=9 =>I=I+1 =>I=4+1 => I=5
+Proceeding the inner loop again (5<=4)=false => we exit the inner loop
+5>4 => DB-t we increase DB and add then element to series C
+DB=DB+1 => DB=6+1 => DB=7
+C(DB)=A(I) => C(7)=9 => series C=5, 4, 2, 7, 12, 3, 9
+
+The execution of the external loop ends here, because the value of i has reached 4. We obtained the union of the two series in the series C  and the number of its elements in the variable db."

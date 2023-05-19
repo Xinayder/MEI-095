@@ -102,3 +102,49 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "Given is sequence (A) with N number of elements, and property (T). We know there exists element with property (T). Give its index!
+
+Solution: We initialize the sequence (I:=1), so we can begin examining with the first element.
+	We step on element per loop, until the element we are on does not have the given property (T). We quit the loop upon reaching element with (T), so afterwards we get its index.
+Example: The sequence(A): 5, 4, 2, 7
+
+No. of elements (N): 4
+T: A(I)=2
+
+Loop while not T(A(I))
+I:=I+1;
+Loop end
+
+Loop on first step:
+i=1,    A[1]=5
+(5=2)=false    => we move on
+
+Loop on second step:
+i=2,    A[2]=4
+(4=2)=false    => we move on
+
+Loop on third step:
+i=3,    A[3]=2
+(2=2)=true => the condition is not false, so we quit the loop
+
+
+The execution of the loop ends here, since we've found an element with property (T) and index=i."

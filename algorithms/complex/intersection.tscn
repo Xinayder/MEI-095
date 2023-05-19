@@ -115,3 +115,79 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "There is an N and M element series (A &B). Give the components that can be found in both of the series in series C!
+
+Solution: We have to go through with a counting loop on every element in series A and we have to check, if that element is in series B or not. This has to be made by going through series A element by element and every time we get to a new element, we have to search series B if that element is in it. If we find the element in series B then we increase the number of elements in series C. The procedure ends if we finished searching every element in series A.
+ 
+Example: Series A: 5, 4, 2, 7
+Series B: 4, 12, 3, 5, 9
+Number of elements at the start: 0
+Number of elements in series A (N): 4
+Number of elements in series B (M): 5
+Series C is empty
+
+Loop I:=from 1 to 4
+J:=1;
+Loop until J<=M and A(I)!=B(J)
+J:=J+1;
+End of loop
+If J<=M then DB:=DB+1; C(DB):=A(I);
+Loop ends
+
+Proceeding the outer loop:
+i=1, j=1;
+Proceeding the first inner loop: 1<=5 and 5!=4 =>J:=J+1 =>J:=1+1 => J:=2
+Proceeding the second inner loop: 2<=5 and 5!=12 =>J:=J+1 =>J:=2+1 => J:=3
+Proceeding the third inner loop: 3<=5 and 5!=3 =>J:=J+1 =>J:=3+1 => J:=4
+Proceeding the fourth inner loop: 4<=5 and (5!=5)=false => the second condition is false so we exit the inner loop
+4<=5 => we increase DB and we put the element into series C
+DB:=DB+1 => DB:=0+1 => DB:=1
+C(DB):=A(I) => C(1):=5 => series C=5
+
+Proceeding the outer loop for the second time:
+i=2, j=1;
+Proceeding the inner loop for the first time: 1<=5 and 4!=4=false => the second condition is false so we exit the loop
+1<=5=true => we increase DB and add the element into series C
+DB:=DB+1 => DB:=1+1 => DB:=2
+C(DB):=A(I) => B(2):=4 => series C=5, 4
+
+Proceeding the outer loop for the third time:
+i=3, j=1;
+Proceeding the inner loop for the first time: 1<=5 and 2!=4 =>J:=J+1 =>J:=1+1 => J:=2
+Proceeding the inner loop for second time: 2<=5 and 2!=12 =>J:=J+1 =>J:=2+1 => J:=3
+Proceeding the inner loop for the third time: 3<=5 and 2!=3 =>J:=J+1 =>J:=3+1 => J:=4
+Proceeding the inner loop for the fourth time: 4<=5 and 2!=5 =>J:=J+1 =>J:=4+1 => J:=5
+Proceeding the inner loop for the fifth time: 5<=5 and 2!=9 =>J:=J+1 =>J:=5+1 => J:=6
+Proceeding the inner loop again (6<=5)=false => we exit inner loop
+6<=5=false => we go to the next element of series A
+
+Proceeding the outer loop for the fourth time:
+i=4, j=1;
+Proceeding the inner loop for the first time: 1<=5 and 7!=4 =>J:=J+1 =>J:=1+1 => J:=2
+Proceeding the inner loop for the second time: 2<=5 and 7!=12 =>J:=J+1 =>J:=2+1 => J:=3
+Proceeding the inner loop for the third time: 3<=5 and 7!=3 =>J:=J+1 =>J:=3+1 => J:=4
+Proceeding the inner loop for the fourth time: 4<=5 and 7!=5 =>J:=J+1 =>J:=4+1 => J:=5
+Proceeding the inner loop for the fifth time: 5<=5 and 7!=9 =>J:=J+1 =>J:=5+1 => J:=6
+Proceeding the inner loop again (6<=5)=false => we exit the inner loop
+6<=5=false => the running of inner loop ends
+
+ The procedure of outer loop ends here, because the value of i reached 4. We got every element that is part of series A and B and we collected them in series C."

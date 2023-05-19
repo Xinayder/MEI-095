@@ -107,3 +107,52 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "Given is sequence (A) with N number of elements, and property (T). Give the largest element of the sequence!
+
+Solution: Initially, a maximum element's index=1, meaning we assume the first element is the largest. After this, we examine all elements on loop step at a time, and compare it to the index of the current maximum. If element \"i\" is larger than element \"max\" then its index becomes the new value of \"max\". After running the loop, variable \"max\" will contain the index of the element, which is truly the largest of the sequence.
+
+Example: The sequence(A): 5, 4, 2, 7
+
+Initial value of \"max\": 1
+No. of elements (N): 4
+
+Loop I:=from 2 to 4
+If A(I)>A(MAX) then MAX:=I;
+Loop end
+
+Loop on first step:
+i=2,    A[2]=4
+(4>5)=false    => we move one, value of \"max\" does not change
+max=1
+
+Loop on second step:
+i=3,    A[3]=2
+(2>5)=false    => we move one, value of \"max\" does not change
+max=1
+
+Loop on third step:
+i=4,    A[4]=7
+(7>5)=true => value of \"max\" changes to index of current element
+max:=i => max:=4
+
+
+The execution of the loop ends here, since \"i\" has reached 4. We have obtained the index of the largest element in sequence A with variable max."

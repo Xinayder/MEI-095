@@ -78,7 +78,7 @@ offset_top = 120.0
 offset_right = 705.0
 offset_bottom = 420.0
 text = "function SplitSelection(N, A, q, B, r, C)
-	q = 0, r = 0;
+	q = 0, r = 0
 
 	loop i=1 to N
 		if T(A(i)) then
@@ -108,3 +108,64 @@ offset_right = 710.0
 offset_bottom = 668.0
 bbcode_enabled = true
 text = "[b][color=orange]NOTE:[/color][/b] The selected element will be highlighted in [color=red]RED[/color]. If the element matches the specified property, it will be highlighted in [color=lime]LIME[/color]."
+
+[node name="DescriptionDialog" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Algorithm description"
+position = Vector2i(20, 40)
+size = Vector2i(680, 660)
+mode = 3
+transient = false
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(680, 660)
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 672.0
+offset_bottom = 611.0
+text = "We have an N element sequence (A) and a property (T). We will have to get two sequences, B is for the elements, which have this property, C is for the elements without this property. Give the number of elements in sequence B!
+
+Solution: In the beginning the number of elements=0 and the elements calculated by sequence C is DBC=0. The selection goes as following: with a counting loop, we investigate every element if they have the property (T) or not. If yes, then we increase the number of elements by 1, and we put that number into sequence B. If not, then we put that element into sequence C. When the loop ends sequence B will have all the elements with the given property, and sequence C will carry the elements without the T property. The db shows the number of elements in sequence B.
+
+Example: sequence (A): 5, 4, 2, 7
+
+Number of elements at start: 0
+Number of elements (N): 4
+T: even numbers
+B empty sequence
+C empty sequence
+
+Loop I:=from 1 to 4
+If T(A(I)) then DB:=DB+1; B(DB):=A(I)
+else DBC:=DBC+1; C(DBC):=A(I);
+End of loop
+
+Performing the loop for the first time:
+i=1,  A[1]=5
+even(5)=false  => we increase DBC and we put the element into sequence C
+DBC:=DBC+1 => DBC:=0+1 => DBC:=1
+C(DBC):=A(I) => C(1):=5 => sequence C=5
+
+Performing the loop for the second time:
+i=2,  A[2]=4
+even(4)=true => we increase DB and put the element into sequence B
+DB:=DB+1 => DB:=0+1 => DB:=1
+B(DB):=A(I) => B(1):=4 => sequence B=4
+
+Performing the loop for the third time:
+i=3,  A[3]=2
+even(2)=true => we increase DB and put the element into sequence B
+DB:=DB+1 => DB:=1+1 => DB:=2
+B(DB):=A(I) => B(2):=2 => sequence B=4, 2
+
+Performing the loop for the fourth time:
+i=4,  A[4]=7
+even(7)=false  => we increase DBC and we put the element into sequence C
+DBC:=DBC+1 => DBC:=1+1 => DBC:=2
+C(DBC):=A(I) => C(2):=7 => sequence C=5, 7
+
+The loop ends here, because i=4. We have the elements from sequence A with property T, in sequence B, and the number of element in DB. The elements without property T are in sequence C."

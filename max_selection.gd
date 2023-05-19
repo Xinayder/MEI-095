@@ -49,6 +49,11 @@ func _ready():
 	_update_info_label()
 	
 	index_changed.connect(self._on_index_changed)
+	$ReadButton.pressed.connect(self._on_read_button_pressed)
+
+
+func _on_read_button_pressed():
+	$DescriptionDialog.show()
 
 
 func _highlight_code_line(lineno):
